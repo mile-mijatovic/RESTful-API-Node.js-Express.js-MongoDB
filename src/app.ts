@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+app.set('trust proxy', 1);
 // Configure CORS
 app.use(
   cors({
