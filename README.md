@@ -45,5 +45,5 @@ By leveraging the API, you can streamline the development process and empower us
 
 ## API Documentation and Postman Collection
 
-- [SwaggerHub Documentation] <a href="https://mm.omega.nextweb.space/address-book/address_book_postman_collection.json">SwaggerHub Documentation</a>
+- [SwaggerHub Documentation] <a href="https://app.swaggerhub.com/apis/MileMijatovic/address-book-restful-api/1.0.0">SwaggerHub Documentation</a>
 - [Postman Collection] <a href="https://mm.omega.nextweb.space/address-book/address_book_postman_collection.json">Download Postman collection</a>
