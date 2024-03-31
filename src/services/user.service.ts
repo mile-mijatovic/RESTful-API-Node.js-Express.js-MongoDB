@@ -97,7 +97,7 @@ class UserService extends EmailService {
 
     if (!tokenRecord) throw new TokenError(messages.auth.invalidToken);
 
-    const user = await User.getUserById(tokenRecord.id);
+    const user = await User.getUserById(tokenRecord.userId);
 
     if (!user) throw new NotFoundError(messages.user.notFound);
 
