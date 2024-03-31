@@ -1,0 +1,71 @@
+{
+  "validation": {
+    "required": "is required",
+    "email": {
+      "invalid": "must be a valid email",
+      "exists": "The user with the entered email already exists"
+    },
+    "password": {
+      "invalid": "must contain at least 8 characters, one lowercase, one uppercase, one number, and one special character",
+      "required": "Password is required",
+      "incorrect": "Incorrect old password",
+      "notMatch": "Password and repeated password do not match",
+      "minCharacters": "Password must include at least 6 characters",
+      "numberCharacter": "Password must include at least one number",
+      "lowercaseCharacter": "Password must include at least one lowercase character",
+      "uppercaseCharacter": "Password must include at least one uppercase character",
+      "specialCharacter": "Password must include at least one special character"
+    },
+    "objectId": {
+      "invalid": "is not a valid. Please check and try again."
+    },
+    "contentType": {
+      "onlyImagesAllowed": "Only image files are allowed for upload. Please select an image file to proceed."
+    },
+    "date": {
+      "format": "must be entered in YYYY-MM-DD format",
+      "invalid": "cannot be in the future"
+    },
+    "anyOnly": {
+      "invalid": "and password do not match"
+    },
+    "fileSize": {
+      "imageSizeExceeded": "The image cannot be larger than 5 MB"
+    }
+  },
+  "contact": {
+    "notFound": "Contact is not found",
+    "exists": "The contact with the entered email already exists",
+    "notExists": "The contact with the provided ID does not exist",
+    "noAddedContacts": "You don't have added contacts",
+    "added": "Contact successfully added",
+    "updated": "Contact data successfully updated",
+    "deleted": "Contact successfully deleted",
+    "failed": "Failed to save contact",
+    "favorite": {
+      "added": "Successfully added to favorites",
+      "removed": "Successfully removed from favorites"
+    }
+  },
+  "image": {
+    "notProvided": "Image is not provided",
+    "uploaded": "Image successfully uploaded",
+    "reset": "User image successfully reset"
+  },
+  "auth": {
+    "registered": "You have been successfully registered",
+    "loggedIn": "You have been successfully logged in",
+    "loggedOut": "You have been successfully logged out",
+    "unauthorized": "Unauthorized: You are not authenticated",
+    "invalidToken": "Invalid or expired token",
+    "incorrectCredentials": "Incorrect credentials. Please check and try again",
+    "resetPassword": "If the user with the entered email exists, a reset link will be sent",
+    "successfullyResetPassword": "Password has been changed successfully",
+    "deletedProfile": "Profile successfully deleted"
+  },
+  "user": {
+    "notFound": "User not found",
+    "notExists": "The user with the entered email does not exist"
+  },
+  "errorOccured": "An error occured"
+}
