@@ -102,8 +102,8 @@ class UserService extends EmailService {
     if (!user) throw new NotFoundError(messages.user.notFound);
 
     user.password = newPassword;
-    await user.save();
     await Token.deleteToken(tokenRecord._id);
+    await user.save();
   }
 
   /**
