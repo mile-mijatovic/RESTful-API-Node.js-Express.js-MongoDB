@@ -81,40 +81,19 @@ class ContactClass extends Model {
     return result.deletedCount > 0;
   }
 
-  static async getAll(query: Query): Promise<IContact[] | null> {
-    return await this.findOne(query);
+  static async getContacts(
+    query: Query,
+    limit: number,
+    skip: number
+  ): Promise<IContact[] | null> {
+    return await this.find(query ?? {})
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 });
   }
 
   static async getById(query: Query): Promise<IContact | null> {
     return await this.findOne(query);
-  }
-
-  static async getContacts(
-    addedBy: Types.ObjectId,
-    options: PaginationOptions,
-    search?: SearchOptions
-  ): Promise<IContact[]> {
-    const { page, limit } = options;
-
-    const currentPage = getHighestNumber(page);
-    const contactsPerPage = getHighestNumber(limit);
-    const skip = (currentPage - 1) * contactsPerPage;
-
-    let query = { addedBy };
-
-    if (search) {
-      Object.keys(search).forEach((key: string) => {
-        const value = search[key];
-        const k = `contact.${key}`;
-        if (typeof value === 'string') {
-          query[k] = new RegExp(value, 'i');
-        } else {
-          query[k] = value;
-        }
-      });
-    }
-
-    return await this.find(query).skip(skip).limit(contactsPerPage);
   }
 }
 

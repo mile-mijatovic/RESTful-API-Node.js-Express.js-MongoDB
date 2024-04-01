@@ -2,7 +2,7 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "target": "ESNext",
     "module": "CommonJS",
     "outDir": "./dist",

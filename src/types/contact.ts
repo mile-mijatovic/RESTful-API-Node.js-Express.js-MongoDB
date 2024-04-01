@@ -59,13 +59,18 @@ export interface Query {
   [key: string]: Types.ObjectId | Partial<IContact>;
 }
 
+export type QueryType = {
+  addedBy: Types.ObjectId;
+  contact?: { [key: string]: string | RegExp };
+};
+
 export interface ContactModel extends Model<IContact> {
   isEmailExists(email: string, addedBy: Types.ObjectId): Promise<boolean>;
   getContacts(
-    addedBy: Types.ObjectId,
-    options: PaginationOptions,
-    search?: SearchOptions
-  ): Promise<ContactsResult>;
+    query: QueryType,
+    limit: number,
+    skip: number
+  ): Promise<IContact[]>;
   getById(query: Query): Promise<IContact | null>;
   add(data: IContact): Promise<IContact>;
   update(query: Query): Promise<IContact | null>;

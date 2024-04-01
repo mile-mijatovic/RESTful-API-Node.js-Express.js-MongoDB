@@ -7,6 +7,7 @@ import {
   IContact,
   PaginationOptions,
   Query,
+  QueryType,
   SearchOptions
 } from '../types/contact';
 import { getHighestNumber } from '../utils';
@@ -30,20 +31,19 @@ class ContactService {
     const contactsPerPage = getHighestNumber(limit);
     const skip = (currentPage - 1) * contactsPerPage;
 
-    let query = { addedBy };
+    let query: any = { addedBy };
 
     if (search) {
       Object.keys(search.contact).forEach((key: string) => {
-        const value = search.contact[key];
-        const k = `contact.${key}`;
-        query[k] = { $regex: value, $options: 'i' };
+        const value = search.contact[key as keyof typeof search.contact];
+        if (value !== undefined) {
+          const k = `contact.${key}`;
+          query[k] = new RegExp(value, 'i');
+        }
       });
     }
 
-    const contactPromise = Contact.find(query)
-      .skip(skip)
-      .limit(contactsPerPage)
-      .sort({ createdAt: -1 });
+    const contactPromise = Contact.getContacts(query, contactsPerPage, skip);
 
     const countPromise = Contact.countDocuments(query);
 
