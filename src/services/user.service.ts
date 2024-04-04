@@ -3,6 +3,7 @@ import { IChangePassword, ILogin, IUser } from '../types/user';
 import messages from '../assets/json/messages.json';
 import {
   AuthenticationError,
+  ConflictError,
   NotFoundError,
   TokenError,
   ValidationError
@@ -28,7 +29,7 @@ class UserService extends EmailService {
   static async register(user: IUser): Promise<void> {
     const existingUser = await User.getUserByEmail(user.email);
     if (existingUser) {
-      throw new Error(messages.validation.email.exists);
+      throw new ConflictError(messages.validation.email.exists);
     }
 
     await User.add(user);
