@@ -23,7 +23,7 @@
       "onlyImagesAllowed": "Only image files are allowed for upload. Please select an image file to proceed."
     },
     "date": {
-      "format": "must be entered in YYYY-MM-DD format",
+      "format": "must be entered in MM-DD-YYYY format",
       "invalid": "cannot be in the future"
     },
     "anyOnly": {

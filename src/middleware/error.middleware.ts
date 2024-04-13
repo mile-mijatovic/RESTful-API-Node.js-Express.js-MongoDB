@@ -8,6 +8,7 @@ import { MulterError } from 'multer';
 const getJoiMessage = (error: ValidationErrorItem) => {
   switch (error.type) {
     case 'string.empty':
+    case 'any.required':
       return messages.validation.required;
     case 'string.email':
       return messages.validation.email.invalid;
