@@ -67,5 +67,6 @@
     "notFound": "User not found",
     "notExists": "The user with the entered email does not exist"
   },
+  "notFound": "The requested API endpoint does not exist",
   "errorOccured": "An error occured"
 }
