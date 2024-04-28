@@ -11,8 +11,6 @@ const {
   PORT,
   SALT,
   MONGODB_URL,
-  JWT_SECRET,
-  JWT_ACCESS_EXPIRATION_MINUTES,
   COOKIE_EXPIRATION,
   SESSION_NAME,
   SESSION_COLLECTION_NAME,
@@ -30,10 +28,6 @@ const config = {
   salt: SALT,
   mongoose: {
     url: MONGODB_URL
-  },
-  jwt: {
-    secret: JWT_SECRET,
-    accessExpirationMinutes: JWT_ACCESS_EXPIRATION_MINUTES
   },
   session: {
     name: SESSION_NAME,

@@ -4,6 +4,7 @@ import {
   logout,
   resetPassword,
   forgotPassword,
+  checkSession,
   register
 } from '../controllers/auth.controller';
 import { requireAuth, validation } from '../middleware';
@@ -21,6 +22,7 @@ router
   .post('/login', validation(loginSchema), login)
   .post('/forgot-password', validation(forgotPasswordSchema), forgotPassword)
   .post('/reset-password', validation(resetPasswordSchema), resetPassword)
+  .get('/session', checkSession)
   .get('/logout', requireAuth, logout);
 
 export default router;

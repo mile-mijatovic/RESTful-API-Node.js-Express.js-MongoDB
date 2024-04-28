@@ -4,7 +4,26 @@ import { AuthenticationError } from '../errors';
 import { UserService } from '../services';
 import { IResponse } from '../types/common';
 import { ILogin, IUser } from '../types/user';
-import { asyncHandler } from '../utils';
+import { asyncHandler, stringToObjectId } from '../utils';
+
+// Check if user is user session is active and is not expired
+export const checkSession = asyncHandler(
+  async (req: Request<IUser>, res: Response) => {
+    if (req.session.userId) {
+      if (Number(req.session.cookie.originalMaxAge) > 0) {
+        const userId = stringToObjectId(req.session.userId);
+
+        const user = await UserService.getUserInfo(userId);
+
+        res.status(200).json({ authenticated: true, user });
+      } else {
+        logout;
+      }
+    } else {
+      throw new AuthenticationError(messages.auth.unauthorized);
+    }
+  }
+);
 
 // Register new user
 export const register = asyncHandler(
@@ -19,14 +38,16 @@ export const register = asyncHandler(
 
 // Login with email and password
 export const login = asyncHandler(
-  async (req: Request<ILogin>, res: Response<IResponse>) => {
-    const token = await UserService.authenticate(req.body);
+  async (req: Request<ILogin>, res: Response) => {
+    const user = await UserService.authenticate(req.body);
 
-    req.session.token = token;
+    req.session.userId = user._id.toString();
 
-    return res
-      .status(200)
-      .json({ success: true, message: messages.auth.loggedIn });
+    return res.status(200).json({
+      success: true,
+      message: messages.auth.loggedIn,
+      user
+    });
   }
 );
 

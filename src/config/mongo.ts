@@ -1,5 +1,4 @@
 import mongoose, { ConnectOptions } from 'mongoose';
-import MongoStore from 'connect-mongo';
 import config from './env';
 import { ConnectionError } from '../errors';
 
@@ -36,8 +35,3 @@ export const connectToDatabase = async (): Promise<void> => {
     throw new ConnectionError(`Error connecting to MongoDB: ${error}`);
   }
 };
-
-export const store = MongoStore.create({
-  mongoUrl: config.mongoose.url,
-  collectionName: config.session.collectionName
-});

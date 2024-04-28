@@ -5,12 +5,6 @@ const envSchema = Joi.object({
     'number.base': 'PORT must be a number',
     'number.integer': 'PORT must be an integer'
   }),
-  JWT_SECRET: Joi.string().required().messages({
-    'any.required': 'JWT_SECRET is a required field'
-  }),
-  JWT_ACCESS_EXPIRATION_MINUTES: Joi.string().messages({
-    'any.required': 'JWT_ACCESS_EXPIRATION_MINUTES must be a string'
-  }),
   BCRYPT_SALT: Joi.number().required().messages({
     'any.required': 'BCRYPT_SALT is a required field',
     'number.base': 'BCRYPT_SALT must be a number',

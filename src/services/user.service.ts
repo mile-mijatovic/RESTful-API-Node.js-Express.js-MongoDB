@@ -1,5 +1,5 @@
 import User from '../models/user.model';
-import { IChangePassword, ILogin, IUser } from '../types/user';
+import { IChangePassword, ILogin, IUser, IUserDoc } from '../types/user';
 import messages from '../assets/json/messages.json';
 import {
   AuthenticationError,
@@ -11,11 +11,9 @@ import {
 import {
   deleteFile,
   generateRandomString,
-  generateToken,
   joinPaths,
   verifyPassword
 } from '../utils';
-import config from '../config/env';
 import Token from '../models/token.model';
 import { EmailService } from '.';
 import { Types } from 'mongoose';
@@ -40,7 +38,7 @@ class UserService extends EmailService {
    * @param credentials email and password
    * @returns jwt token
    */
-  static async authenticate(credentials: ILogin): Promise<string> {
+  static async authenticate(credentials: ILogin): Promise<IUserDoc> {
     const { email, password } = credentials;
     const user = await User.getUserByEmail(email);
 
@@ -54,11 +52,7 @@ class UserService extends EmailService {
       throw new AuthenticationError(messages.auth.incorrectCredentials);
     }
 
-    const token = generateToken({ userId: user._id }, config.jwt.secret, {
-      expiresIn: config.jwt.accessExpirationMinutes
-    });
-
-    return token;
+    return user;
   }
 
   /**

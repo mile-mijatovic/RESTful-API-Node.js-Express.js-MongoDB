@@ -19,10 +19,10 @@ const contactSchema = {
     }),
     additionalInfo: Joi.object({
       birthDate: Joi.date().label('Birth date'),
-      companyName: Joi.string().label('Company name'),
-      position: Joi.string().label('Position'),
-      companyAddress: Joi.string().label('Company address'),
-      additionalDetails: Joi.string().label('Additional details')
+      companyName: Joi.string().allow(null).label('Company name'),
+      position: Joi.string().allow(null).label('Position'),
+      companyAddress: Joi.string().allow(null).label('Company address'),
+      additionalDetails: Joi.string().allow(null).label('Additional details')
     }),
     social: Joi.object({
       facebook: Joi.string().allow(null).label('Facebook'),

@@ -12,14 +12,11 @@ import {
 } from './file.util';
 import asyncHandler from './asyncHandler.util';
 import { hashPassword, verifyPassword } from './password.util';
-import { generateToken, verifyToken } from './token.util';
 import { stringToObjectId } from './mongo';
 
 export {
   hashPassword,
   verifyPassword,
-  generateToken,
-  verifyToken,
   asyncHandler,
   generateRandomString,
   getHighestNumber,

@@ -8,41 +8,47 @@ import profileRoutes from './routes/profile.route';
 import authRoutes from './routes/auth.route';
 
 import config from './config/env';
-import { store } from './config/mongo';
 import { errorHandler, notFoundHandler } from './middleware';
 
+const MongoDBStore = require('connect-mongodb-session')(session);
 const app: Application = express();
 const PORT = config.port;
 const isProduction = process.env.NODE_ENV === 'production';
 const prefix = isProduction ? '/address-book' : '';
 
+const store = new MongoDBStore({
+  uri: config.mongoose.url,
+  collection: config.session.collectionName
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-app.set('trust proxy', 1);
 // Configure CORS
 app.use(
   cors({
     credentials: true,
     // TODO: Update production origin url
-    origin: isProduction ? '*' : config.clientUrl
+    origin: isProduction ? '*' : 'http://localhost:3000',
+    optionsSuccessStatus: 200
   })
 );
 
+app.set('trust proxy', true);
 // Configure session
 app.use(
   session({
     name: config.session.name,
     secret: config.session.secret as string,
-    resave: false,
-    saveUninitialized: false,
-    store,
     cookie: {
       httpOnly: isProduction,
       secure: isProduction,
       maxAge: +config.session.cookie.expiration
-    }
+    },
+    store,
+    resave: false,
+    saveUninitialized: false
   })
 );
 
