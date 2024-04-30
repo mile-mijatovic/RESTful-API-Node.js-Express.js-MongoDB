@@ -10,7 +10,7 @@ By leveraging the API, you can streamline the development process and empower us
 ## Features
 
  - ### Authentication
-    - **Login**: Authenticates a user using the email and password. Upon successful authentication, a JWT token is generated and used for session-based authentication. Additionally, a secure HTTP cookie is set in the response to maintain the user's session
+    - **Login**: Authenticates a user using the email and password. Upon successful authentication, a session is created for the user, and a secure HTTP cookie is set in the response to maintain the user's session.
     - **Register**: Register a new user with a unique email address
     - **Forgot password**: Sends an email with instructions for resetting the password
     - **Reset password**: Resets the password for the user account based on the instructions received via the email
