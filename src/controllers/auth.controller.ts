@@ -42,11 +42,12 @@ export const login = asyncHandler(
     const user = await UserService.authenticate(req.body);
 
     req.session.userId = user._id.toString();
+    const loggedInUser = await UserService.getUserInfo(user._id);
 
     return res.status(200).json({
       success: true,
       message: messages.auth.loggedIn,
-      user
+      user: loggedInUser
     });
   }
 );
