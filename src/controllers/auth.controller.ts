@@ -9,19 +9,13 @@ import { asyncHandler, stringToObjectId } from '../utils';
 // Check if user is user session is active and is not expired
 export const checkSession = asyncHandler(
   async (req: Request<IUser>, res: Response) => {
-    if (req.session.userId) {
-      if (Number(req.session.cookie.originalMaxAge) > 0) {
-        const userId = stringToObjectId(req.session.userId);
+    if (!req.session.userId) return;
 
-        const user = await UserService.getUserInfo(userId);
+    if (Number(req.session.cookie.originalMaxAge) <= 0) logout;
 
-        res.status(200).json({ authenticated: true, user });
-      } else {
-        logout;
-      }
-    } else {
-      throw new AuthenticationError(messages.auth.unauthorized);
-    }
+    const userId = stringToObjectId(req.session.userId);
+    const user = await UserService.getUserInfo(userId);
+    res.status(200).json({ authenticated: true, user });
   }
 );
 
